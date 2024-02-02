@@ -12,18 +12,21 @@ const useStyles = () => {
   };
 };
 
-function PropertyListingPage({properties}) {
+function FavoritesPage({properties}) {
   const styles = useStyles();
 
   return (
     <div>
       <div style={styles.propertyListingContainer}>
         {properties.map((p) => {
-          return (<PropertyListing property={p} propertyKey={p.listingId} key={p.listingId} />);
+          if (localStorage.getItem(p.listingId)) {
+            return (<PropertyListing property={p} propertyKey={p.listingId} key={p.listingId} />);
+          }
+          return null;
         })}
       </div>
     </div>
   );
 }
 
-export default PropertyListingPage;
+export default FavoritesPage;
